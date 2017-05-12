@@ -1,6 +1,6 @@
 {
   "name": "archieml-pipe",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Pipe a Google Doc with ArchieML data to local JSON with easy authentication steps.",
   "repository": {
     "type": "git",

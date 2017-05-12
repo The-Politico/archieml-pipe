@@ -15,7 +15,6 @@ const exportDoc = (auth, archie) => {
       winston.log('error', `Error accessing gdoc: ${er}`);
       return;
     }
-    console.log(doc);
     const exportLink = doc.exportLinks['text/html'];
     auth._makeRequest({ // eslint-disable-line no-underscore-dangle
       method: 'GET',
