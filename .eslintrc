@@ -1,0 +1,12 @@
+{
+  "root": true,
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "rules": {
+    "no-console": 0,
+    "jsx-a11y/img-has-alt": 0
+  },
+  "env": {
+      "node": true
+  }
+}
