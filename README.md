@@ -75,6 +75,12 @@ The file needs the following:
 
 **Do not** change the `redirectUrl`.
 
+##### Enter the code you receive from Google here:
+
+archieml-pipe will open a browser that will guide you throw the Google permission dialogue, after which you will be redirected with an auth code. Copy and paste it into the prompt.
+
+![Token](token.png)
+
 ### .gitignore
 
 This library saves authentication details in local files at the root of your project so you don't have to re-enter them. Therefore, it's also a **really good idea** to add those files to your `.gitignore`:
