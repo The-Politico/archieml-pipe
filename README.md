@@ -16,8 +16,9 @@ Use archieml-pipe in your build system:
 const gulp = require('gulp');
 const archiePipe = require('archieml-pipe').default;
 
-gulp.task('archie', () => {
+gulp.task('archie', (cb) => {
     archiePipe('path/to/export/data.json');
+    cb();
 });
 ```
 
