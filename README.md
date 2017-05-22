@@ -1,4 +1,4 @@
-![Politico](logo.png)
+![POLITICO](https://rawgithub.com/The-Politico/src/master/images/logo/badge.png)
 
 # archieml-pipe [![npm version](https://badge.fury.io/js/archieml-pipe.svg)](https://badge.fury.io/js/archieml-pipe)
 
