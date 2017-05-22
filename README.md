@@ -78,7 +78,7 @@ The file needs the following:
 
 ##### Enter the code you receive from Google here:
 
-archieml-pipe will open a browser that will guide you throw the Google permission dialogue, after which you will be redirected with an auth code. Copy and paste it into the prompt.
+archieml-pipe will open a browser that will guide you through the Google permission dialogue, after which you will be redirected with an auth code. Copy and paste it into the prompt.
 
 ![Token](token.png)
 
