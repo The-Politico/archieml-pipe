@@ -1,4 +1,4 @@
-![Politico](logo.png)
+![POLITICO](https://rawgithub.com/The-Politico/src/master/images/logo/badge.png)
 
 # archieml-pipe [![npm version](https://badge.fury.io/js/archieml-pipe.svg)](https://badge.fury.io/js/archieml-pipe)
 
@@ -78,7 +78,7 @@ The file needs the following:
 
 ##### Enter the code you receive from Google here:
 
-archieml-pipe will open a browser that will guide you throw the Google permission dialogue, after which you will be redirected with an auth code. Copy and paste it into the prompt.
+archieml-pipe will open a browser that will guide you through the Google permission dialogue, after which you will be redirected with an auth code. Copy and paste it into the prompt.
 
 ![Token](token.png)
 
