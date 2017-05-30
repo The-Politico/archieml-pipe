@@ -9,7 +9,6 @@ const exportDoc = (auth, archie) => {
     version: 'v2',
     auth,
   });
-  console.log('ARCHIE', archie.docId);
   drive.files.get({ fileId: archie.docId }, (er, doc) => {
     if (er) {
       winston.log('error', `Error accessing gdoc: ${er}`);
