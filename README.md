@@ -1,6 +1,6 @@
 ![POLITICO](https://rawgithub.com/The-Politico/src/master/images/logo/badge.png)
 
-# archieml-pipe [![npm version](https://badge.fury.io/js/archieml-pipe.svg)](https://badge.fury.io/js/archieml-pipe)
+# archieml-pipe [![npm](https://img.shields.io/npm/v/archieml-pipe.svg)](https://www.npmjs.com/package/archieml-pipe)
 
 archieml-pipe is a library to help easily export data structured in [ArchieML](http://archieml.org/) in Google Docs to local JSON. You can then use that data as context to render HTML templates.
 
