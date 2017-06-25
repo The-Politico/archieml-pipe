@@ -2,12 +2,12 @@ import http from 'http';
 import inquirer from 'inquirer';
 import open from 'open';
 import url from 'url';
+import fs from 'fs-extra';
 import winston from './logging';
-import storeToken from './store-token';
 import exportGDoc from './export-gdoc';
 
 
-const getNewToken = (auth, archie) => {
+const getNewToken = (auth, opts) => {
   const oauth = auth;
   const authUrl = oauth.generateAuthUrl({
     access_type: 'offline',
@@ -16,7 +16,6 @@ const getNewToken = (auth, archie) => {
   });
 
   const hostname = 'localhost';
-  const port = 6006;
   const server = http.createServer((req, res) => {
     const queryObject = url.parse(req.url, true).query;
     res.statusCode = 200;
@@ -37,9 +36,9 @@ const getNewToken = (auth, archie) => {
     `);
   });
 
-  server.listen(port, hostname);
+  server.listen(opts.redirectPort, hostname);
 
-  console.log('Authorize this app by visiting this url: ', authUrl);
+  winston.info('Authorize this app by visiting this url: ', authUrl);
   open(authUrl);
   const questions = [
     {
@@ -57,8 +56,8 @@ const getNewToken = (auth, archie) => {
         return;
       }
       oauth.credentials = token;
-      storeToken(token);
-      exportGDoc(oauth, archie);
+      fs.writeFile(opts.tokenPath, JSON.stringify(token));
+      exportGDoc(oauth, opts);
     });
   });
 };

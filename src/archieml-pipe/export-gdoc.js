@@ -4,14 +4,14 @@ import parseGDoc from './parse-gdoc';
 import winston from './logging';
 
 
-const exportDoc = (auth, archie) => {
+const exportDoc = (auth, opts) => {
   const drive = google.drive({
     version: 'v2',
     auth,
   });
-  drive.files.get({ fileId: archie.docId }, (er, doc) => {
+  drive.files.get({ fileId: opts.docId }, (er, doc) => {
     if (er) {
-      winston.log('error', `Error accessing gdoc: ${er}`);
+      winston.error(`Error accessing gdoc: ${er}`);
       return;
     }
     const exportLink = doc.exportLinks['text/html'];
@@ -20,15 +20,15 @@ const exportDoc = (auth, archie) => {
       uri: exportLink,
     }, (err, body) => {
       if (err) {
-        winston.log('error', `Error downloading gdoc ${err}`);
+        winston.error(`Error downloading gdoc ${err}`);
         return;
       }
       const handler = new htmlparser.DomHandler((error, dom) => {
         if (error) {
-          winston.log('error', `Error parsing gdoc ${error}`);
+          winston.error(`Error parsing gdoc ${error}`);
           return;
         }
-        parseGDoc(dom, archie);
+        parseGDoc(dom, opts);
       });
       const parser = new htmlparser.Parser(handler);
       parser.write(body);
