@@ -73,7 +73,7 @@ const parseGDoc = (dom, opts) => {
     fs.writeJSON(opts.exportPath, archieData);
     return archieData;
   } catch (e) {
-    winston.error(chalk.bgRed('Cannot access that Google Doc (Are you sure you\'ve shared it?)'), e);
+    winston.error(chalk.bgRed('Error accessing Google Doc'), 'Are you sure you\'ve shared it? :', e);
   }
   return null;
 };
