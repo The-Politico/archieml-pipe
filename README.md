@@ -22,7 +22,7 @@ const config = {
   googleClientSecret: '<google client secret>', // required
   redirectPort: '6006', // defaults to 6006
   exportPath: 'path/to/save/data.json', // defaults to ./data.json
-  tokenPath: 'path/to/save/token.json', //defaults to ./archie-token.json
+  tokenPath: 'path/to/save/token.json', // defaults to ./archie-token.json
 };
 
 gulp.task('archie', (cb) => {
@@ -31,7 +31,7 @@ gulp.task('archie', (cb) => {
 });
 ```
 
-This example uses [Gulp](http://gulpjs.com/), but of course you can use whatever you like. Just call the function, passing it a string which will represent the path to your export file.
+This example uses [Gulp](http://gulpjs.com/), but of course you can use whatever you like. Just call the function, passing it a config object with the required properties.
 
 ### Credentials
 
@@ -68,9 +68,9 @@ Simply open you doc in the browser and copy the ID from the URL:
 Use the client secret key you copied out of the previous step.
 
 
-##### Authorization code
+##### Token
 
-archieml-pipe will open a browser that will guide you through the Google permission dialogue, after which you will be redirected with an auth code. Copy and paste it into the prompt.
+On your first run, archieml-pipe will open a browser that will guide you through the Google permission dialogue to access you document, after which you will be redirected with an auth code. Copy and paste it into the prompt and archieml-pipe will save the token locally to a JSON file at `tokenPath`.
 
 ![Token](token.png)
 

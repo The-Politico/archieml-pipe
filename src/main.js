@@ -1,7 +1,7 @@
 import path from 'path';
+import chalk from 'chalk';
 import authorize from './archieml-pipe/authorize';
 import winston from './archieml-pipe/logging';
-
 
 const defaults = {
   googleDocId: null,
@@ -15,7 +15,7 @@ const defaults = {
 const main = (customOptions) => {
   const opts = Object.assign(defaults, customOptions);
   if (!opts.googleDocId || !opts.googleClientId || !opts.googleClientSecret) {
-    winston.error('Missing Google connection info.');
+    winston.error(chalk.bgRed('Missing Google connection info.'));
     return;
   }
   authorize(opts);

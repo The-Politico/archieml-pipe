@@ -2,6 +2,7 @@ import archieml from 'archieml';
 import fs from 'fs-extra';
 import htmlEntities from 'html-entities';
 import url from 'url';
+import chalk from 'chalk';
 import winston from './logging';
 
 const Entities = htmlEntities.AllHtmlEntities;
@@ -72,7 +73,7 @@ const parseGDoc = (dom, opts) => {
     fs.writeJSON(opts.exportPath, archieData);
     return archieData;
   } catch (e) {
-    winston.log('error', 'Cannot access that Google Doc (Are you sure you\'ve shared it?)', e);
+    winston.error(chalk.bgRed('Cannot access that Google Doc (Are you sure you\'ve shared it?)'), e);
   }
   return null;
 };
