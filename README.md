@@ -16,8 +16,17 @@ Use archieml-pipe in your build system:
 const gulp = require('gulp');
 const archiePipe = require('archieml-pipe').default;
 
+const config = {
+  googleDocId: '<google doc id>', // required
+  googleClientId: '<google client id>', // required
+  googleClientSecret: '<google client secret>', // required
+  redirectPort: '6006', // defaults to 6006
+  exportPath: 'path/to/save/data.json', // defaults to ./data.json
+  tokenPath: 'path/to/save/token.json', //defaults to ./archie-token.json
+};
+
 gulp.task('archie', (cb) => {
-    archiePipe('path/to/export/data.json');
+    archiePipe(config);
     cb();
 });
 ```
@@ -26,9 +35,7 @@ This example uses [Gulp](http://gulpjs.com/), but of course you can use whatever
 
 ### Credentials
 
-archieml-pipe will prompt you for credentials to connect to your Google Doc if they haven't alreay been supplied in a `archie.json` file at the root of your directory. Here's how to get them:
-
-##### What's you Google doc ID?
+##### `googleDocId`
 
 Simply open you doc in the browser and copy the ID from the URL:
 
@@ -36,7 +43,7 @@ Simply open you doc in the browser and copy the ID from the URL:
 
 **Don't forget** to change your share settings to **"Anyone with the link can view."**
 
-##### What's your Google app client ID?
+##### `googleClientId`
 
 ![Oauth](dev-console.png)
 
@@ -56,41 +63,17 @@ Simply open you doc in the browser and copy the ID from the URL:
 
 8. Click it and enable the API in the next screen.
 
-##### What's your Google app client secret key?
+##### `googleClientSecret`
 
 Use the client secret key you copied out of the previous step.
 
-### archie.json
-You can shortcut several prompts by creating an `archie.json` file in the root of your project ahead of time. (For example, we use [Yeoman](http://yeoman.io/) to create that file and remember credentials across builds.)
 
-The file needs the following:
-
-```javascript
-{
-    "docId": "<Google Doc ID>",
-    "clientId": "<Google wep app client ID>",
-    "clientSecret": "<Google wep app client secret>",
-    "redirectUrl": "http://localhost:6006"
-}
-```
-
-**Do not** change the `redirectUrl`.
-
-##### Enter the code you receive from Google here:
+##### Authorization code
 
 archieml-pipe will open a browser that will guide you through the Google permission dialogue, after which you will be redirected with an auth code. Copy and paste it into the prompt.
 
 ![Token](token.png)
 
-### .gitignore
-
-This library saves authentication details in local files at the root of your project so you don't have to re-enter them. Therefore, it's also a **really good idea** to add those files to your `.gitignore`:
-
-```
-# archieml-pipe
-archie.json
-archie-token.json
-```
 
 ### Credits
 
