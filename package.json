@@ -8,6 +8,7 @@
   },
   "author": "Jon McClure <jmcclure@politico.com> (https://github.com/The-Politico)",
   "main": "lib/main.js",
+  "repository": "The-Politico/archieml-pipe",
   "dependencies": {
     "archieml": "^0.4.2",
     "babel-eslint": "^7.2.3",
