@@ -2,12 +2,13 @@ import http from 'http';
 import inquirer from 'inquirer';
 import open from 'open';
 import url from 'url';
+import fs from 'fs-extra';
+import chalk from 'chalk';
 import winston from './logging';
-import storeToken from './store-token';
 import exportGDoc from './export-gdoc';
 
 
-const getNewToken = (auth, archie) => {
+const getNewToken = (auth, opts) => {
   const oauth = auth;
   const authUrl = oauth.generateAuthUrl({
     access_type: 'offline',
@@ -16,7 +17,6 @@ const getNewToken = (auth, archie) => {
   });
 
   const hostname = 'localhost';
-  const port = 6006;
   const server = http.createServer((req, res) => {
     const queryObject = url.parse(req.url, true).query;
     res.statusCode = 200;
@@ -37,9 +37,9 @@ const getNewToken = (auth, archie) => {
     `);
   });
 
-  server.listen(port, hostname);
+  server.listen(opts.redirectPort, hostname);
 
-  console.log('Authorize this app by visiting this url: ', authUrl);
+  winston.info('Authorize this app by visiting this url: ', chalk.magenta(authUrl));
   open(authUrl);
   const questions = [
     {
@@ -53,12 +53,12 @@ const getNewToken = (auth, archie) => {
     server.close();
     oauth.getToken(code, (err, token) => {
       if (err) {
-        winston.log('error', `Error while trying to retrieve access token: ${err}`);
+        winston.error(chalk.bgRed('Error while trying to retrieve access token:'), err);
         return;
       }
       oauth.credentials = token;
-      storeToken(token);
-      exportGDoc(oauth, archie);
+      fs.writeFile(opts.tokenPath, JSON.stringify(token));
+      exportGDoc(oauth, opts);
     });
   });
 };

@@ -1,13 +1,13 @@
 import archieml from 'archieml';
 import fs from 'fs-extra';
 import htmlEntities from 'html-entities';
-import path from 'path';
 import url from 'url';
+import chalk from 'chalk';
 import winston from './logging';
 
 const Entities = htmlEntities.AllHtmlEntities;
 
-const parseGDoc = (dom, archie) => {
+const parseGDoc = (dom, opts) => {
   const tagHandlers = {
     base(tag) {
       let str = '';
@@ -70,12 +70,10 @@ const parseGDoc = (dom, archie) => {
       match.replace(/”|“/g, '"').replace(/‘|’/g, "'"));
 
     const archieData = archieml.load(parsedText);
-    fs.writeJSON(
-      path.resolve(process.cwd(), archie.exportPath),
-      archieData);
+    fs.writeJSON(opts.exportPath, archieData);
     return archieData;
   } catch (e) {
-    winston.log('error', 'Cannot access that Google Doc (Are you sure you\'ve shared it?)', e);
+    winston.error(chalk.bgRed('Error accessing Google Doc'), 'Are you sure you\'ve shared it? :', e);
   }
   return null;
 };
